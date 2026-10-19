@@ -1,0 +1,64 @@
+
+name: Nightreign Website CI/CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required website file
+        run: test -f index.html
+
+      - name: Check HTML, CSS and JavaScript files
+        run: |
+          find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) \
+            -not -path "./.git/*" > website-files.txt
+          test -s website-files.txt
+          cat website-files.txt
+
+      - name: Build website artifact
+        run: |
+          mkdir -p dist
+          cp -r index.html dist/
+          for item in *.css *.js assets images fonts; do
+            if [ -e "$item" ]; then cp -r "$item" dist/; fi
+          done
+          test -f dist/index.html
+
+      - name: Upload website artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightreign-website
+          path: dist/
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
