@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ character.book.title }}{% endblock %}
+
+{% block content %}
+  <section class="shell section">
+    <article class="detail-layout">
+      <div class="detail-cover">
+        {% if character.book.official_art %}
+          <img src="{{ character.book.official_art.url }}" alt="Официальный арт {{ character.book.title }}" />
+        {% else %}
+          <img src="{{ character.book.cover.url }}" alt="Портрет {{ character.book.title }}" />
+        {% endif %}
+      </div>
+      <div class="detail-content">
+        <p class="eyebrow">Детальная страница персонажа</p>
+        <h1 class="section-title">{{ character.book.title }}</h1>
+        <p class="detail-meta">{{ character.book.role }} &bull; {{ character.book.author.name }}</p>
+        {% if character.categories %}
+          <p class="detail-meta">Категории: {{ character.categories|join:", " }}</p>
+        {% endif %}
+        {% if character.book.is_featured %}
+          <span class="badge">Ключевой класс</span>
+        {% endif %}
+        <p class="detail-description">{{ character.book.description }}</p>
+
+        <p class="detail-meta">Базовые статы</p>
+        <div class="stats">
+          <div class="stat"><strong>{{ character.hp }}</strong><span>HP</span></div>
+          <div class="stat"><strong>{{ character.fp }}</strong><span>Мана</span></div>
+          <div class="stat"><strong>{{ character.stamina }}</strong><span>Стамина</span></div>
+        </div>
+
+        <p class="detail-meta">Статы на 15 уровне</p>
+        <div class="stats">
+          <div class="stat"><strong>{{ character.level_15.hp }}</strong><span>HP</span></div>
+          <div class="stat"><strong>{{ character.level_15.fp }}</strong><span>Мана</span></div>
+          <div class="stat"><strong>{{ character.level_15.stamina }}</strong><span>Стамина</span></div>
+        </div>
+
+        <p class="detail-meta">Базовые атрибуты</p>
+        <div class="attributes-grid">
+          <div class="stat"><strong>{{ character.attributes.vigor }}</strong><span>Vigor</span></div>
+          <div class="stat"><strong>{{ character.attributes.mind }}</strong><span>Mind</span></div>
+          <div class="stat"><strong>{{ character.attributes.endurance }}</strong><span>Endurance</span></div>
+          <div class="stat"><strong>{{ character.attributes.strength }}</strong><span>Strength</span></div>
+          <div class="stat"><strong>{{ character.attributes.dexterity }}</strong><span>Dexterity</span></div>
+          <div class="stat"><strong>{{ character.attributes.intelligence }}</strong><span>Intelligence</span></div>
+          <div class="stat"><strong>{{ character.attributes.faith }}</strong><span>Faith</span></div>
+          <div class="stat"><strong>{{ character.attributes.arcane }}</strong><span>Arcane</span></div>
+        </div>
+
+        <p class="detail-meta">Способности</p>
+        <div class="ability-details">
+          <article>
+            <h3>Пассивка: {{ character.abilities.passive }}</h3>
+            <p>{{ character.abilities.passive_description }}</p>
+          </article>
+          <article>
+            <h3>Навык: {{ character.abilities.skill }}</h3>
+            <p>{{ character.abilities.skill_description }}</p>
+          </article>
+          <article>
+            <h3>Ульта: {{ character.abilities.ultimate }}</h3>
+            <p>{{ character.abilities.ultimate_description }}</p>
+          </article>
+        </div>
+
+        <p class="detail-meta">Скалирование</p>
+        <div class="scaling">
+          <div><span>Сила</span><b>{{ character.scaling.strength }}</b></div>
+          <div><span>Ловкость</span><b>{{ character.scaling.dexterity }}</b></div>
+          <div><span>Интеллект</span><b>{{ character.scaling.intelligence }}</b></div>
+          <div><span>Вера</span><b>{{ character.scaling.faith }}</b></div>
+          <div><span>Тайна</span><b>{{ character.scaling.arcane }}</b></div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="button" href="{% url 'books:book_list' %}">Назад в каталог</a>
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'books:book_favorite' character.book.pk %}">
+              {% csrf_token %}
+              <button class="button button--ghost" type="submit">
+                {% if is_favorite %}Убрать из избранного{% else %}Добавить в избранное{% endif %}
+              </button>
+            </form>
+          {% endif %}
+          <a class="button button--ghost" href="{% url 'books:book_update' character.book.pk %}">Редактировать</a>
+          <a class="button button--ghost" href="{% url 'books:book_delete' character.book.pk %}">Удалить</a>
+        </div>
+      </div>
+    </article>
+    {% include 'books/_comments.html' with title='Комментарии' %}
+  </section>
+{% endblock %}

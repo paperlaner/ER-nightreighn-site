@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Elden Ring: Nightreign{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <script defer src="{% static 'js/library.js' %}"></script>
+  </head>
+  <body>
+    <div class="bg-glow" aria-hidden="true"></div>
+    {% block header %}
+      <header class="site-header">
+        <div class="shell shell--header">
+          <a class="brand" href="{% url 'books:home' %}">Nightreign Atlas</a>
+          {% include 'includes/menu.html' %}
+          {% include 'includes/user_card.html' with card_user=user %}
+        </div>
+      </header>
+    {% endblock %}
+
+    <main>
+      {% if messages %}
+        <section class="shell message-stack">
+          {% for message in messages %}
+            <div class="message">{{ message }}</div>
+          {% endfor %}
+        </section>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+
+    {% block footer %}
+      <footer class="site-footer">
+        <div class="shell">
+          <p>Учебный Django-проект в стилистике Elden Ring: Nightreign.</p>
+        </div>
+      </footer>
+    {% endblock %}
+  </body>
+</html>

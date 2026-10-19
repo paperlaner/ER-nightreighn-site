@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600">
+  <defs>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#496d63" />
+      <stop offset="100%" stop-color="#1f342f" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="600" rx="32" fill="url(#g2)" />
+  <rect x="48" y="58" width="384" height="484" rx="26" fill="rgba(255,255,255,0.08)" />
+  <text x="72" y="230" fill="#f1f8f2" font-size="30" font-family="Georgia, serif">Mikhail Bulgakov</text>
+  <text x="72" y="292" fill="#f1f8f2" font-size="46" font-family="Georgia, serif">Master &amp; Margarita</text>
+  <text x="72" y="354" fill="#d0e1d4" font-size="24" font-family="Arial, sans-serif">Magic realism</text>
+</svg>

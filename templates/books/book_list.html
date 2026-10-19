@@ -1,0 +1,61 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Каталог персонажей{% endblock %}
+
+{% block content %}
+  <section class="shell section">
+    <div class="section-head">
+      <h1 class="section-title">Каталог Nightfarers</h1>
+      <a class="button button--ghost" href="{% url 'books:book_create' %}">Добавить</a>
+    </div>
+
+    <form class="search-bar" method="get" novalidate data-validate-search>
+      <label for="search-input">Поиск по имени</label>
+      <div class="search-row">
+        <input
+          id="search-input"
+          name="q"
+          type="search"
+          value="{{ query }}"
+          placeholder="Например: Wylder"
+          minlength="2"
+        />
+        <button class="button" type="submit">Найти</button>
+      </div>
+      <p class="form-hint">JS проверяет, чтобы запрос содержал минимум 2 символа.</p>
+    </form>
+
+    <div class="card-grid">
+      {% for item in books %}
+        <article class="book-card">
+          {% if item.book.official_art %}
+            <img src="{{ item.book.official_art.url }}" alt="Официальный арт {{ item.book.title }}" />
+          {% else %}
+            <img src="{{ item.book.cover.url }}" alt="Портрет {{ item.book.title }}" />
+          {% endif %}
+          <div class="book-card__body">
+            <p class="book-card__meta">{{ item.book.role }} • {{ item.book.author.name }}</p>
+            <h2>{{ item.book.title }}</h2>
+            <p>{{ item.book.description|truncatechars:140 }}</p>
+            {% if item.categories %}
+              <p class="book-card__meta">Категории: {{ item.categories|join:", " }}</p>
+            {% endif %}
+            <div class="stats stats--compact">
+              <div class="stat"><strong>{{ item.hp }}</strong><span>HP</span></div>
+              <div class="stat"><strong>{{ item.fp }}</strong><span>FP</span></div>
+              <div class="stat"><strong>{{ item.stamina }}</strong><span>Stamina</span></div>
+            </div>
+            {% if item.book.is_featured %}
+              <span class="badge">Избранный</span>
+            {% endif %}
+            <a class="text-link" href="{{ item.book.get_absolute_url }}">Подробнее</a>
+            <a class="text-link" href="{% url 'books:book_update' item.book.pk %}">Редактировать</a>
+            <a class="text-link" href="{% url 'books:book_delete' item.book.pk %}">Удалить</a>
+          </div>
+        </article>
+      {% empty %}
+        <p class="empty-state">По этому запросу персонажи не найдены.</p>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

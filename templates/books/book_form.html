@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить персонажа{% endblock %}
+
+{% block content %}
+  <section class="shell section">
+    <div class="section-head">
+      <h1 class="section-title">{{ form_title }}</h1>
+      <span>Загрузка изображения в `media/`</span>
+    </div>
+
+    <form class="book-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for field in form %}
+        <div class="field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <small>{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <small class="field-error">{{ error }}</small>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button class="button" type="submit">{{ submit_label }}</button>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Удаление карточки{% endblock %}
+
+{% block content %}
+  <section class="shell section">
+    <div class="profile-card">
+      <p class="eyebrow">Удаление записи</p>
+      <h1 class="section-title">{{ book.title }}</h1>
+      <p>Подтверди удаление карточки. Эта операция выполняется через ORM и удаляет запись из базы.</p>
+      <form method="post">
+        {% csrf_token %}
+        <div class="hero-actions">
+          <button class="button" type="submit">Удалить</button>
+          <a class="button button--ghost" href="{{ book.get_absolute_url }}">Отмена</a>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}

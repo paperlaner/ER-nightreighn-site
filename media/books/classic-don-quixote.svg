@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d98e5f" />
+      <stop offset="100%" stop-color="#7f3d22" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="600" rx="32" fill="url(#g1)" />
+  <circle cx="100" cy="120" r="48" fill="rgba(255,255,255,0.16)" />
+  <circle cx="390" cy="520" r="78" fill="rgba(255,255,255,0.14)" />
+  <text x="48" y="220" fill="#fff7ef" font-size="34" font-family="Georgia, serif">Miguel de</text>
+  <text x="48" y="270" fill="#fff7ef" font-size="52" font-family="Georgia, serif">Don Quixote</text>
+  <text x="48" y="330" fill="#ffe6d6" font-size="24" font-family="Arial, sans-serif">Classic Collection</text>
+</svg>

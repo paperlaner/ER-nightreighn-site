@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}About | Elden Ring: Nightreign{% endblock %}
+
+{% block content %}
+  <section class="shell section">
+    <div class="error-page about-page">
+      <p class="eyebrow">About</p>
+      <img class="about-page__art" src="{{ about_image }}" alt="Nightreign art" />
+      <h1 class="section-title">{{ about_text|title }}</h1>
+      <p class="error-page__text">{{ about_text }}</p>
+      <div class="hero-actions">
+        <a class="button" href="{% url 'books:home' %}">На главную</a>
+        <a class="button button--ghost" href="{% url 'books:book_list' %}">К персонажам</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}

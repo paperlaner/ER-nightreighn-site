@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600">
+  <defs>
+    <linearGradient id="w" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#243147" />
+      <stop offset="100%" stop-color="#0f1621" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="600" rx="24" fill="url(#w)" />
+  <circle cx="360" cy="120" r="90" fill="rgba(244,195,122,0.16)" />
+  <text x="48" y="240" fill="#f2f2f4" font-size="56" font-family="Georgia, serif">Wylder</text>
+  <text x="48" y="300" fill="#f4c37a" font-size="24" font-family="Arial, sans-serif">Balanced frontline</text>
+</svg>

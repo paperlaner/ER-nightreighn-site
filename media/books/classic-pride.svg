@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600">
+  <defs>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d9b5a2" />
+      <stop offset="100%" stop-color="#9e6b62" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="600" rx="32" fill="url(#g3)" />
+  <path d="M0 440 C120 380 220 520 480 430 L480 600 L0 600 Z" fill="rgba(255,255,255,0.14)" />
+  <text x="58" y="220" fill="#fff9f6" font-size="30" font-family="Georgia, serif">Jane Austen</text>
+  <text x="58" y="288" fill="#fff9f6" font-size="48" font-family="Georgia, serif">Pride and</text>
+  <text x="58" y="342" fill="#fff9f6" font-size="48" font-family="Georgia, serif">Prejudice</text>
+</svg>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить автора{% endblock %}
+
+{% block content %}
+  <section class="shell section">
+    <div class="profile-card">
+      <p class="eyebrow">CreateView</p>
+      <h1 class="section-title">Добавить автора</h1>
+      <form class="book-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+{% endblock %}

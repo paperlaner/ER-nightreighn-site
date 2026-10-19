@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Удаление автора{% endblock %}
+
+{% block content %}
+  <section class="shell section">
+    <div class="profile-card">
+      <p class="eyebrow">DeleteView</p>
+      <h1 class="section-title">Удалить автора</h1>
+      <p>{{ author.name }}</p>
+      <form method="post">
+        {% csrf_token %}
+        <div class="hero-actions">
+          <button class="button" type="submit">Удалить</button>
+          <a class="button button--ghost" href="{% url 'books:book_list_cbv' %}">Отмена</a>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}
