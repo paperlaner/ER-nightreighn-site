@@ -26,26 +26,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check required website file
-        run: test -f index.html
-
-      - name: Check HTML, CSS and JavaScript files
+      - name: Check required website files
         run: |
-          find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) \
-            -not -path "./.git/*" > website-files.txt
-          test -s website-files.txt
-          cat website-files.txt
+          test -s index.html
+          test -s styles.css
+          test -s script.js
 
-      - name: Build website artifact
+      - name: Check HTML structure
+        run: |
+          grep -qi '<html' index.html
+          grep -qi '</html>' index.html
+          grep -qi '<body' index.html
+          grep -qi '</body>' index.html
+
+      - name: Build website
         run: |
           mkdir -p dist
-          cp -r index.html dist/
-          for item in *.css *.js assets images fonts; do
-            if [ -e "$item" ]; then cp -r "$item" dist/; fi
-          done
-          test -f dist/index.html
+          cp index.html styles.css script.js dist/
+          if [ -d images ]; then cp -r images dist/; fi
+          if [ -d assets ]; then cp -r assets dist/; fi
+          test -s dist/index.html
 
-      - name: Upload website artifact
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: nightreign-website
