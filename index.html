@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Elden Ring: Nightreign — персонажи и статы</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-glow" aria-hidden="true"></div>
+    <header class="hero">
+      <div class="hero__inner">
+        <p class="eyebrow">Elden Ring: Nightreign</p>
+        <h1>Персонажи и их статы</h1>
+        <p class="sub">
+          Все Nightfarer‑персонажи с базовыми значениями на уровне 1 и
+          масштабированием характеристик.
+        </p>
+        <div class="controls">
+          <label class="control">
+            <span>Поиск</span>
+            <input id="search" type="search" placeholder="Например: Duchess" />
+          </label>
+          <label class="control">
+            <span>Сортировка</span>
+            <select id="sort">
+              <option value="name">По имени</option>
+              <option value="hp">HP</option>
+              <option value="fp">FP</option>
+              <option value="stamina">Stamina</option>
+              <option value="strength">Сила</option>
+              <option value="dexterity">Ловкость</option>
+            </select>
+          </label>
+          <label class="control checkbox">
+            <input id="desc" type="checkbox" checked />
+            <span>Сначала высокие</span>
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section id="grid" class="grid" aria-live="polite"></section>
+    </main>
+
+    <footer class="footer">
+      <p>Данные: базовые значения на уровне 1 и буквенное масштабирование.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
